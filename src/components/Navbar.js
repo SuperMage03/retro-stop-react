@@ -1,4 +1,4 @@
-import Modal from "./Modal";
+import LoginModal from "./LoginModal";
 
 const Navbar = () => {
     return (
@@ -8,11 +8,7 @@ const Navbar = () => {
 
                 <div className={"flex"}>
                     <a href={"https://www.google.ca"}><h2 className={"text-xl mr-4"}>Shop</h2></a>
-                    <Modal label={"Login"}>
-                        <div className={"w-10/12 bg-purple-100 h-20 my-6 mx-auto"}>
-                            asdasd
-                        </div>
-                    </Modal>
+                    <LoginModal />
                 </div>
             </div>
         </nav>

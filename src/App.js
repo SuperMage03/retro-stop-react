@@ -28,7 +28,7 @@ const App = () => {
                         </div>
 
                         <img className={"block w-1/2 rounded-xl"} src={"/images/retro banner.jpg"}
-                             alt={"Retro Game Image"} />
+                             alt={"Retro Game Banner"} />
                     </div>
                 </div>
             </div>

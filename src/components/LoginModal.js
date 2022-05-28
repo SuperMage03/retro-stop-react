@@ -3,28 +3,45 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Modal from "./Modal";
 import {useRef, useState} from "react";
 import ModalCloseBtn from "./ModalCloseBtn";
+import { useForm } from "react-hook-form";
 
 
 const LoginModal = () => {
     const closeModalRef = useRef(null);
     const [loginMode, setLoginMode ] = useState("login");
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+
+    const onLoginSubmit = (data) => {
+        const requestUrl = `${process.env.REACT_APP_API_DOMAIN}/auth/login`;
+        console.log(data.email)
+    };
+
+    const onRegisterSubmit = (data) => {
+        const requestUrl = `${process.env.REACT_APP_API_DOMAIN}/auth/register`;
+
+    };
+
+
     const LoginForm = () => {
         return (
-            <form action="" className={"pb-6"}>
+            <form className={"pb-6"} onSubmit={handleSubmit(onLoginSubmit)}>
                 <div className={"flex flex-col mb-5"}>
                     <label htmlFor="emailIpt">E-Mail</label>
-                    <input id={"emailIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="email" placeholder={"Your Email"} />
+                    <input id={"emailIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="email" placeholder={"Your Email"} {...register("email", { required: true })} />
+                    {errors.email && <span>This field is required</span>}
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
                     <label htmlFor="passwordIpt">Password</label>
-                    <input id={"passwordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Your Password"} />
+                    <input id={"passwordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Your Password"} {...register("password", { required: true })} />
+                    {errors.password && <span>This field is required</span>}
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
                     <div className={"flex items-center"}>
-                        <input id={"rememberMeIpt"} className={"mr-2"} type="checkbox" />
+                        <input id={"rememberMeIpt"} className={"mr-2"} type="checkbox" {...register("rememberMe")} />
                         <label htmlFor="rememberMeIpt">Remember Me</label>
                     </div>
                 </div>
@@ -41,25 +58,25 @@ const LoginModal = () => {
 
     const SignupForm = () => {
         return (
-            <form action="" className={"pb-6"}>
+            <form className={"pb-6"} onSubmit={handleSubmit(onRegisterSubmit)}>
                 <div className={"flex flex-col mb-5"}>
                     <label htmlFor="usernameIpt">Username</label>
-                    <input id={"usernameIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="text" placeholder={"Username"} />
+                    <input id={"usernameIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="text" placeholder={"Username"} {...register("username")} />
                 </div>
 
                 <div className={"flex flex-col mb-5"}>
                     <label htmlFor="emailIpt">E-Mail</label>
-                    <input id={"emailIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="email" placeholder={"Your Email"} />
+                    <input id={"emailIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="email" placeholder={"Your Email"} {...register("email")} />
                 </div>
 
                 <div className={"flex flex-col mb-5"}>
                     <label htmlFor="passwordIpt">Password</label>
-                    <input id={"passwordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Your Password"} />
+                    <input id={"passwordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Your Password"} {...register("password")} />
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
                     <label htmlFor="repeatPasswordIpt">Repeat Password</label>
-                    <input id={"repeatPasswordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Repeat Password"} />
+                    <input id={"repeatPasswordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Repeat Password"} {...register("passwordCopy")} />
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
@@ -78,6 +95,7 @@ const LoginModal = () => {
             </form>
         );
     };
+
 
     return (
         <Modal label={"Login"} className={""} closeModalRef={closeModalRef}>

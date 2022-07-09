@@ -30,13 +30,13 @@ const LoginModal = () => {
                 <div className={"flex flex-col mb-5"}>
                     <label htmlFor="emailIpt">E-Mail</label>
                     <input id={"emailIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="email" placeholder={"Your Email"} {...register("email", { required: true })} />
-                    {errors.email && <span>This field is required</span>}
+                    {errors.email && <span className={"text-red-400"}>This field is required</span>}
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
                     <label htmlFor="passwordIpt">Password</label>
                     <input id={"passwordIpt"} className={"px-2 py-1 my-1 rounded border-2"} type="password" placeholder={"Your Password"} {...register("password", { required: true })} />
-                    {errors.password && <span>This field is required</span>}
+                    {errors.password && <span className={"text-red-400"}>This field is required</span>}
                 </div>
 
                 <div className={"flex flex-col mb-4"}>
